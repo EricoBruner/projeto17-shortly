@@ -9,7 +9,7 @@ CREATE TABLE "links" (
   "id" serial PRIMARY KEY,
   "url" text UNIQUE NOT NULL,
   "short_url" text UNIQUE NOT NULL,
-  "visitCount" integer NOT NULL DEFAULT 0,
+  "visit_count" integer NOT NULL DEFAULT 0,
   "user_id" integer NOT NULL
 );
 
