@@ -7,11 +7,11 @@ export async function signUp(req, res) {
 
   try {
     const encryptedPassword = bcrypt.hashSync(password, 10);
-    const user = { name, email, password: encryptedPassword };
+    password = encryptedPassword;
 
     await db.query(
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)",
-      [user.name, user.email, user.password]
+      [name, email, password]
     );
 
     return res.sendStatus(201);
@@ -30,24 +30,26 @@ export async function signUp(req, res) {
 export async function signIn(req, res) {
   const { email, password } = req.body;
 
-  const login = { email, password };
-
   try {
     const token = uuid();
 
-    const error = loginValidator(login);
-    if (error) return res.status(422).send(error);
+    const {
+      rows: [user],
+    } = await db.query("SELECT * FROM users WHERE email=$1", [email]);
 
-    const user = await db.collection("users").findOne({ email });
-    if (!user) return res.status(404).send("Usuario não encontrado!");
+    if (!user) return res.status(401).send("Usuário não encontrado!");
 
-    if (!bcrypt.compareSync(password, user.password))
-      return res.status(401).send("Usuario ou senha incorretas!");
+    if (!bcrypt.compareSync(password, user.password)) {
+      return res.status(401).send("Usuário ou senha incorretas!");
+    }
 
-    await db.collection("sessions").deleteOne({ userId: user._id });
-    await db.collection("sessions").insertOne({ userId: user._id, token });
+    await db.query("DELETE FROM sessions WHERE user_id=$1", [user.id]);
+    await db.query("INSERT INTO sessions (token, user_id) VALUES ($1, $2)", [
+      token,
+      user.id,
+    ]);
 
-    return res.status(200).json({ token: token, user: user.name });
+    return res.status(200).send({ token: token });
   } catch (err) {
     return res.status(500).send(err.message);
   }

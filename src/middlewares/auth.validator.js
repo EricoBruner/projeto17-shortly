@@ -1,4 +1,4 @@
-import { signUpSchema } from "../schemas/auth.schemas.js";
+import { signInSchema, signUpSchema } from "../schemas/auth.schemas.js";
 import { schemaValidator } from "../validators/schema.validator.js";
 
 export function authValidator(req, res, next) {
@@ -16,6 +16,10 @@ export function authValidator(req, res, next) {
     next();
   }
 
-  if (path == "/") {
+  if (path == "/signin") {
+    const error = schemaValidator(signInSchema, user);
+    if (error) return res.status(422).send({ message: error });
+
+    next();
   }
 }
