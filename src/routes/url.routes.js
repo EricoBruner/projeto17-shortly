@@ -12,4 +12,6 @@ urlRouter.use(tokenValidator);
 
 urlRouter.post("/urls/shorten", urlValidator, urlController.createShortUrl);
 
+urlRouter.delete("/urls/:id", urlController.deleteShortUrl);
+
 export default urlRouter;

@@ -5,13 +5,13 @@ export default async function tokenValidator(req, res, next) {
 
   const token = authorization?.replace("Bearer ", "");
 
-  if (!token) return res.status(401).send("Token inválido!");
+  if (!token) return res.status(401).send({ message: "Token inválido!" });
 
   const {
     rows: [session],
   } = await db.query("SELECT * FROM sessions WHERE token=$1", [token]);
 
-  if (!session) return res.status(401).send("Token inválido!");
+  if (!session) return res.status(401).send({ message: "Token inválido!" });
 
   res.locals.user_id = session.user_id;
 

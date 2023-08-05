@@ -3,7 +3,17 @@ import {
   createShortUrl,
   getOneShortUrl,
   openShortUrl,
+  deleteShortUrl,
 } from "./url.controller.js";
 
-export const authController = { signIn, signUp };
-export const urlController = { createShortUrl, getOneShortUrl, openShortUrl };
+export const authController = {
+  signIn,
+  signUp,
+};
+
+export const urlController = {
+  createShortUrl,
+  getOneShortUrl,
+  openShortUrl,
+  deleteShortUrl,
+};

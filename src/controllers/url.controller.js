@@ -60,3 +60,30 @@ export async function openShortUrl(req, res) {
     return res.status(500).send({ message: error.message });
   }
 }
+
+export async function deleteShortUrl(req, res) {
+  const { id } = req.params;
+  const { user_id } = res.locals;
+
+  try {
+    const {
+      rows: [link],
+    } = await db.query(`SELECT * FROM links WHERE id=$1`, [id]);
+
+    if (!link) {
+      return res.status(404).send({ message: "Url encurtada não encontrada!" });
+    }
+
+    if (link.user_id != user_id) {
+      return res
+        .status(401)
+        .send({ message: "Essa url encurtada não pertence a esse usuário!" });
+    }
+
+    await db.query("DELETE FROM links WHERE id=$1", [id]);
+
+    return res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+}
