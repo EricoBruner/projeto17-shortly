@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import { db } from "../database/database.connection.js";
 
 export async function signUp(req, res) {
-  const { name, email, password } = req.body;
+  let { name, email, password } = req.body;
 
   try {
     const encryptedPassword = bcrypt.hashSync(password, 10);

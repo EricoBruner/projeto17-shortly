@@ -4,6 +4,7 @@ import {
   getOneShortUrl,
   openShortUrl,
   deleteShortUrl,
+  getAllUserShortUrls,
 } from "./url.controller.js";
 
 export const authController = {
@@ -16,4 +17,5 @@ export const urlController = {
   getOneShortUrl,
   openShortUrl,
   deleteShortUrl,
+  getAllUserShortUrls,
 };
