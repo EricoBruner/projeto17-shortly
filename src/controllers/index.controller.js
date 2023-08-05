@@ -1,10 +1,10 @@
 import { signIn, signUp } from "./auth.controller.js";
+import { getAllUserShortUrls } from "./user.controller.js";
 import {
   createShortUrl,
   getOneShortUrl,
   openShortUrl,
   deleteShortUrl,
-  getAllUserShortUrls,
 } from "./url.controller.js";
 
 export const authController = {
@@ -12,10 +12,13 @@ export const authController = {
   signUp,
 };
 
+export const userController = {
+  getAllUserShortUrls,
+};
+
 export const urlController = {
   createShortUrl,
   getOneShortUrl,
   openShortUrl,
   deleteShortUrl,
-  getAllUserShortUrls,
 };

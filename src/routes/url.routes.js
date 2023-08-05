@@ -14,6 +14,4 @@ urlRouter.post("/urls/shorten", urlValidator, urlController.createShortUrl);
 
 urlRouter.delete("/urls/:id", urlController.deleteShortUrl);
 
-urlRouter.get("/users/me", urlController.getAllUserShortUrls);
-
 export default urlRouter;
