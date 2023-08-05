@@ -6,8 +6,7 @@ export async function createShortUrl(req, res) {
   const { user_id } = res.locals;
 
   try {
-    const randon_value = nanoid(15);
-    const short_url = `${req.protocol}://${req.headers.host}/urls/open/${randon_value}`;
+    const short_url = nanoid(12);
 
     const {
       rows: [{ id }],
@@ -17,6 +16,46 @@ export async function createShortUrl(req, res) {
     );
 
     return res.status(201).send({ id: id, shortUrl: short_url });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+}
+
+export async function getOneShortUrl(req, res) {
+  const { id } = req.params;
+
+  try {
+    const {
+      rows: [link],
+    } = await db.query(
+      `SELECT id, short_url AS "shortUrl", url FROM links WHERE id=$1`,
+      [id]
+    );
+
+    if (!link) return res.status(404).send({ message: "Url não encontrada!" });
+
+    return res.status(200).send(link);
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+}
+
+export async function openShortUrl(req, res) {
+  const { shortUrl } = req.params;
+
+  try {
+    const {
+      rows: [link],
+    } = await db.query(
+      `UPDATE links SET visit_count = visit_count + 1 WHERE short_url=$1 RETURNING url;`,
+      [shortUrl]
+    );
+
+    if (!link) {
+      return res.status(404).send({ message: "Url encurtada não encontrada!" });
+    }
+
+    return res.redirect(link.url);
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
