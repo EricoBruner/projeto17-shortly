@@ -10,7 +10,7 @@ export function authValidator(req, res, next) {
     if (error) return res.status(422).send({ message: error });
 
     if (user.password != user.confirmPassword) {
-      return res.status(402).send({ message: "As senhas não são iguais!" });
+      return res.status(422).send({ message: "As senhas não são iguais!" });
     }
 
     next();
