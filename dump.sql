@@ -29,7 +29,8 @@ CREATE TABLE public.links (
     url text NOT NULL,
     short_url text NOT NULL,
     visit_count integer DEFAULT 0 NOT NULL,
-    user_id integer NOT NULL
+    user_id integer NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -60,7 +61,8 @@ ALTER SEQUENCE public.links_id_seq OWNED BY public.links.id;
 CREATE TABLE public.sessions (
     id integer NOT NULL,
     token text NOT NULL,
-    user_id integer NOT NULL
+    user_id integer NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -92,7 +94,8 @@ CREATE TABLE public.users (
     id integer NOT NULL,
     name character varying NOT NULL,
     email character varying NOT NULL,
-    password character varying NOT NULL
+    password character varying NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -141,36 +144,36 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: links; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.links VALUES (4, 'https://google.com.br/images', 'kzwaXiZalEZrGWd', 0, 1);
-INSERT INTO public.links VALUES (6, 'https://google.com.br/images:igual', 'q-zQgUOA5OSVK2C', 0, 1);
-INSERT INTO public.links VALUES (7, 'https://teste.com.br/images:igual', 'HE3GibKb8sdL081', 0, 1);
-INSERT INTO public.links VALUES (9, 'https://teste.com.br/images', 'rnj8cj_aPcI514H', 0, 1);
-INSERT INTO public.links VALUES (10, 'https://teste', '9N17biC9nio5kzv', 0, 1);
-INSERT INTO public.links VALUES (13, 'https://teste.com.br/teste', 'http://undefined/urls/open/fi310sTyUmPhLMh', 0, 1);
-INSERT INTO public.links VALUES (15, 'https://teste.com.br/teste/teste', 'http://localhost:5000/urls/open/9M5DwVagUMwj_Zk', 0, 1);
-INSERT INTO public.links VALUES (1, 'https://google.com', '9xeFjmDX_wrF5hC', 3, 1);
-INSERT INTO public.links VALUES (18, 'https://erico.com.br', 'XvvGafXGt7dW', 4, 9);
-INSERT INTO public.links VALUES (20, 'https://erico.com.br/images/vitor_clay', 'RkKYci17FU17', 1, 9);
-INSERT INTO public.links VALUES (11, 'https://teste.com.br', '7uzXS7VMXPMbfIC', 3, 1);
-INSERT INTO public.links VALUES (17, 'https://erico.com', 'Az0YRAdczZ5t', 10, 9);
-INSERT INTO public.links VALUES (19, 'https://erico.com.br/images', 'ptQflYtD4VGA', 4, 9);
+INSERT INTO public.links VALUES (4, 'https://google.com.br/images', 'kzwaXiZalEZrGWd', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (6, 'https://google.com.br/images:igual', 'q-zQgUOA5OSVK2C', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (7, 'https://teste.com.br/images:igual', 'HE3GibKb8sdL081', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (9, 'https://teste.com.br/images', 'rnj8cj_aPcI514H', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (10, 'https://teste', '9N17biC9nio5kzv', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (13, 'https://teste.com.br/teste', 'http://undefined/urls/open/fi310sTyUmPhLMh', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (15, 'https://teste.com.br/teste/teste', 'http://localhost:5000/urls/open/9M5DwVagUMwj_Zk', 0, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (1, 'https://google.com', '9xeFjmDX_wrF5hC', 3, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (18, 'https://erico.com.br', 'XvvGafXGt7dW', 4, 9, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (20, 'https://erico.com.br/images/vitor_clay', 'RkKYci17FU17', 1, 9, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (11, 'https://teste.com.br', '7uzXS7VMXPMbfIC', 3, 1, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (17, 'https://erico.com', 'Az0YRAdczZ5t', 10, 9, '2023-08-06 12:58:20.226927');
+INSERT INTO public.links VALUES (19, 'https://erico.com.br/images', 'ptQflYtD4VGA', 4, 9, '2023-08-06 12:58:20.226927');
 
 
 --
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.sessions VALUES (8, 'c7641c58-dbba-4792-ad7e-68f5c2e03c14', 1);
-INSERT INTO public.sessions VALUES (9, '65c4065c-83e3-4200-b50d-d44668a18770', 9);
+INSERT INTO public.sessions VALUES (8, 'c7641c58-dbba-4792-ad7e-68f5c2e03c14', 1, '2023-08-06 12:59:11.644254');
+INSERT INTO public.sessions VALUES (9, '65c4065c-83e3-4200-b50d-d44668a18770', 9, '2023-08-06 12:59:11.644254');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', '$2b$10$0slrZu03Fnes.GpZhgyjNOGcQya4xUEeFTc3w9WQJjfl8LFrlpaBK');
-INSERT INTO public.users VALUES (9, 'Erico', 'erico@driven.com.br', '$2b$10$W1kU6SIj4wIDIF/NPBfDqOArU6Bh7i0Qn36za80ycOIDPPdYU4Nj6');
-INSERT INTO public.users VALUES (10, 'Vitorr', 'vitorr@driven.com.br', '$2b$10$MXzZU/2dVfnWgO36gox9XOvb7r9fpF7uxn8vQOmgkdGx3FeWTQ7lq');
+INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', '$2b$10$0slrZu03Fnes.GpZhgyjNOGcQya4xUEeFTc3w9WQJjfl8LFrlpaBK', '2023-08-06 12:58:17.019936');
+INSERT INTO public.users VALUES (9, 'Erico', 'erico@driven.com.br', '$2b$10$W1kU6SIj4wIDIF/NPBfDqOArU6Bh7i0Qn36za80ycOIDPPdYU4Nj6', '2023-08-06 12:58:17.019936');
+INSERT INTO public.users VALUES (10, 'Vitorr', 'vitorr@driven.com.br', '$2b$10$MXzZU/2dVfnWgO36gox9XOvb7r9fpF7uxn8vQOmgkdGx3FeWTQ7lq', '2023-08-06 12:58:17.019936');
 
 
 --
