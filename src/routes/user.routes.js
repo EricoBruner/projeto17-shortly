@@ -4,8 +4,6 @@ import { userController } from "../controllers/index.controller.js";
 
 const userRouter = Router();
 
-userRouter.use(tokenValidator);
-
-userRouter.get("/users/me", userController.getAllUserShortUrls);
+userRouter.get("/users/me", tokenValidator, userController.getAllUserShortUrls);
 
 export default userRouter;

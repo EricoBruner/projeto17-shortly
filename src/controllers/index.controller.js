@@ -1,5 +1,6 @@
 import { signIn, signUp } from "./auth.controller.js";
 import { getAllUserShortUrls } from "./user.controller.js";
+import { getRanking } from "./ranking.controller.js";
 import {
   createShortUrl,
   getOneShortUrl,
@@ -14,6 +15,10 @@ export const authController = {
 
 export const userController = {
   getAllUserShortUrls,
+};
+
+export const rankingController = {
+  getRanking,
 };
 
 export const urlController = {

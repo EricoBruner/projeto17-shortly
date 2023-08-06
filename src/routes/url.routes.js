@@ -8,10 +8,13 @@ const urlRouter = Router();
 urlRouter.get("/urls/:id", urlController.getOneShortUrl);
 urlRouter.get("/urls/open/:shortUrl", urlController.openShortUrl);
 
-urlRouter.use(tokenValidator);
+urlRouter.post(
+  "/urls/shorten",
+  tokenValidator,
+  urlValidator,
+  urlController.createShortUrl
+);
 
-urlRouter.post("/urls/shorten", urlValidator, urlController.createShortUrl);
-
-urlRouter.delete("/urls/:id", urlController.deleteShortUrl);
+urlRouter.delete("/urls/:id", tokenValidator, urlController.deleteShortUrl);
 
 export default urlRouter;
